@@ -1,6 +1,5 @@
 const express = require('express')
-const productsRouter = require('./products')
-productsRouter.products = require('./MockProducts')
+const productsRouter = require('./server/products')
 
 const app = express()
 const PORT = 4001
@@ -15,4 +14,9 @@ app.use('/products', productsRouter)
 
 app.get('/', (req, res, next) => {
     res.send('Hello, World!\n');
+})
+
+app.use((err, req, res, next) => {
+    res.status(err.status)
+    res.send(err.status + ': ' + err)
 })
