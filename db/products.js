@@ -10,12 +10,8 @@ const productsModel = {
             SELECT *
             FROM products
         `
-        try {
-            const res = await query(text)
-            return res.rows
-        } catch(e) {
-            throw(e)
-        }
+        const res = await query(text)
+        return res.rows
     },
 
     async find(id) {
@@ -26,12 +22,8 @@ const productsModel = {
         `
         const params = [id]
 
-        try {
-            const res = await query(text, params)
-            return res.rows[0]
-        } catch(e) {
-            throw(e)
-        }
+        const res = await query(text, params)
+        return res.rows[0]
     },
 
     async create({ name, description, price}) {
@@ -44,12 +36,8 @@ const productsModel = {
         if (!name) {
             throw(new Error('cannot create product without name'))
         }
-        try {
-            const res = await query(text, params)
-            return res.rows[0]
-        } catch(e) {
-            throw(e)
-        }
+        const res = await query(text, params)
+        return res.rows[0]
     },
 
     async delete(id) {
@@ -59,12 +47,8 @@ const productsModel = {
             RETURNING *
         `
         const params = [id]
-        try {
-            const res = await query(text, params)
-            return res.rows[0]
-        } catch(e) {
-            throw(e)
-        }
+        const res = await query(text, params)
+        return res.rows[0]
     },
 
     async update({id, name, price, description}) {
@@ -80,12 +64,8 @@ const productsModel = {
             throw new(Error('Cannot update product without id'))
         }
         const params = [name, price, description, id]
-        try {
-            const res = await query(text, params)
-            return res.rows[0]
-        } catch(e) {
-            throw(e)
-        }
+        const res = await query(text, params)
+        return res.rows[0]
     }
 }
 
